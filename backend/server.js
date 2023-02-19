@@ -8,6 +8,8 @@ import morgan from "morgan"
 import path from 'path'
 import { fileURLToPath } from 'url'
 import connect from './config/config.js'
+import { register } from './controllers/auth.js'
+import authRoutes from './routes/auth.js'
 
 config()
 const __filename = fileURLToPath(import.meta.url)
@@ -35,6 +37,12 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({ storage })
+
+// Routes
+app.post('auth/register', upload.single('picture'), register)
+
+// Middlewares Routes
+app.use('/auth', authRoutes)
 
 // Initialize Server and Database
 async function start() {
