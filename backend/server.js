@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url'
 import connect from './config/config.js'
 import { register } from './controllers/auth.js'
 import authRoutes from './routes/auth.js'
+import usersRoutes from './routes/users.js'
 
 config()
 const __filename = fileURLToPath(import.meta.url)
@@ -43,6 +44,7 @@ app.post('auth/register', upload.single('picture'), register)
 
 // Middlewares Routes
 app.use('/auth', authRoutes)
+app.use('/users', usersRoutes)
 
 // Initialize Server and Database
 async function start() {
